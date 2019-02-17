@@ -1,0 +1,21 @@
+version: '3'
+services:
+    db:
+      image: postgres:alpine
+      env_file:
+        - "env/postgres.env"
+      networks: 
+        - db
+      volumes:
+        - db-data:/var/lib/postgresql/data
+      ports:
+        - 5432:5432
+    adminer: 
+      image: adminer
+      links:
+        - db
+volumes:
+  db-data:
+
+networks:
+    db:
